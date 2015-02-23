@@ -8,17 +8,27 @@ gitリポジトリ作成
 
 ## コミットログ表示
 git log
+git log {リビジョン番号}
 
-## 
+基本的にコマンド引数でリビジョン番号を指定する部分にはブランチ名やタグ名を指定できる
+
+## ワーキングツリーとインデックス上のコミットされていない変更情報
 git status
 
+## git status を行ベースでシンプルに表示
 git status -s
+
+## コミット作成時の作成者名表示
+git config --get user.name
+
+## コミット作成時の作成者メールアドレス表示
+git config --get user.email
 
 
 indexへの追加/削除など
 ====================
 
-## 追加
+## インデックスへの追加
 git add
 
 
@@ -64,8 +74,18 @@ git push
 stash系
 ========
 
-git stash
+## スタッシュに保存
+git stash save
+デフォルトではワーキングツリーの「変更があるTrackedファイル」がスタッシュ領域に退避される
 
+## 未コミットな新規ファイルなどUntrackedファイルも含めてスタッシュに保存
+git stash --include-untracked
+
+## 
+
+## スタッシュ上の変更をワーキングツリーに戻す
+git stash pop
+(引数でどのスタッシュをpopするか選択可能)
 
 
 履歴修正系
@@ -77,5 +97,6 @@ git stash
 ## 直近のコミットメッセージを再編集
 git commit --amend
 
+## 直近のコミットのauthor情報(メールアドレスなど)を表示
 
-## 
+anymore anymore ....
