@@ -1,59 +1,90 @@
 **gitリポジトリ作成**  
-`git init`  
+```
+git init  
+```
 (カレントディレクトリがgitリポジトリのルートディレクトリになる)
 
 参照系
 -----
 
 **コミットログ表示**  
-`git log`  
-`git log {リビジョン番号}`  
+```
+git log
+git log {リビジョン番号}
+```
+
 基本的にコマンド引数でリビジョン番号を指定する部分にはブランチ名やタグ名を指定できる
 
 **ワーキングツリーとインデックス上のコミットされていない変更情報**  
-`git status`
+```
+git status
+```
 
 **git status を行ベースでシンプルに表示**  
-`git status -s`
+```
+git status -s
+```
 
 **コミット作成時の作成者名表示**  
-`git config --get user.name`
+```
+git config --get user.name
+```
 
 **コミット作成時の作成者メールアドレス表示**  
-`git config --get user.email`
+```
+git config --get user.email
+```
 
 
 indexへの追加/削除など
 --------------------
 
 **インデックスへの追加**  
-`git add {ファイル名}`
+```
+git add {ファイル名}
+```
 
 
 コミットの作成
 ---------------
 
 **ステージングされているファイルからコミット作成**  
-`git commit`
+```
+git commit
+```
 
 **ステージングされていない変更のあるTrackedファイルもまとめてコミット**  
-`git commit -a`
+```
+git commit -a
+```
 
 
 ブランチ系
 -----------
 
 **ブランチ移動**  
-`git checkout {branch名}`
+```
+git checkout {branch名}
+```
 
 **現在のブランチを表示**  
-`git branch`
+```
+git branch
+```
 
 **全てのブランチを表示(origin/xxxも表示される)**  
-`git branch -a`
+```
+git branch -a
+```
 
 **ブランチ作成(現在のHEAD)**  
-`git checkout -b {新規ブランチ名}`
+```
+git brachn {新規ブランチ名} [新規ブランチの開始点リビジョン]
+```
+  例1: git branch issues-22  
+  例2: git branch issues-22 e8346b3   
+
+`git checkout -b {新規ブランチ名} [新規ブランチの開始点リビジョン]`
 
 
 リモートに関する操作
@@ -62,7 +93,7 @@ indexへの追加/削除など
 **リモートリポジトリの登録**  
 `git remote add {リモートリポジトリ名} {リモートリポジトリURL}`
 
-**リモートリポジトリを更新 (細かく指定する場合)**  
+**ローカルコミットをリモートリポジトリに反映 **  
 `git push [リモートリポジトリ名] [更新元ブランチ][:リモートブランチ名]`
 
 リモートリポジトリを省いた場合、多くの場合 origin にpushされる  
@@ -71,6 +102,17 @@ indexへの追加/削除など
 
 git.push.defaultなどの設定によるが  
 だいたいのところ初回コミットを除くと `git push` で思った通りの挙動になるはず(説明不足..)  
+
+**リモートリポジトリの内容を取得**  
+`git fetch`  
+
+git fetchではワーキングツリーは更新されない  
+ローカルリポジトリが講師されるだけ
+
+**リモートリポジトリの内容を取得し、ローカルに残った不要な追跡ブランチを削除**  
+`git fetch --prune`  
+これにより追跡先のないリモート追跡ブランチがローカルから削除できる
+
 
 
 stash系
@@ -81,7 +123,9 @@ stash系
 デフォルトではワーキングツリーの「変更があるTrackedファイル」がスタッシュ領域に退避される
 
 **未コミットな新規ファイルなどUntrackedファイルも含めてスタッシュに保存**  
-`git stash --include-untracked`
+`git stash --include-untracked`  
+or  
+`git stash -u`
 
 **スタッシュ上の変更をワーキングツリーに戻す**  
 `git stash pop`  
@@ -90,12 +134,23 @@ stash系
 **スタッシュを削除する**  
 `git stash drop`
 
+**保存されたstash一覧を表示**  
+`git stash list`
+
+**stashの内容をみる**  
+`git stash show -v`  
+(引数でどのスタッシュを表示するか選択可能)
+
 履歴修正系
 ------------
 
-## 注意
-ワーキングツリーをキレイにしておくこと
-(git status -s で M, A, R, U  のファイルががない状態)
+## 作業前の注意
+1. ワーキングツリーをキレイにしておくこと  
+  (git status -s で M, A, R, U  のファイルががない状態)
+2. 誤操作対策として、branchを作っておくとよい
+```
+git checkout -b backup
+```
 
 **直近のコミットメッセージを再編集**  
 `git commit --amend`
