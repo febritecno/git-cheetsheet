@@ -147,10 +147,10 @@ or
 ## 作業前の注意
 1. ワーキングツリーをキレイにしておくこと  
   (git status -s で M, A, R, U  のファイルががない状態)
-2. 誤操作対策として、branchを作っておくとよい
-    ```
-    git checkout -b backup
-    ```
+2. 誤操作対策として、branchを作っておくとよい  
+  ```
+  git checkout -b backup
+  ```
 
 **直近のコミットメッセージを再編集**  
 `git commit --amend`
