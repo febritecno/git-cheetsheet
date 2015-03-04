@@ -46,6 +46,12 @@ git graph
 git log --graph --date-order -C -M --pretty=format:'%h [%ar] [%an] %Cgreen%d%Creset %s' --all
 ```
 
+**コミットの属するブランチを表示**
+```
+git branch -a --contains {コミットID}
+(-aを付けなければローカルブランチ限定で対象コミットが含まれるブランチを表示)
+```
+
 indexへの追加/削除など
 --------------------
 
